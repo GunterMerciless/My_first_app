@@ -57,10 +57,10 @@ async def clear_error(error, ctx):
 @Bot.command()
 async def hello(ctx):
     await ctx.send('Wake up {0}...'.format(ctx.author.mention))
- """my_file = discord.File("C:/Users/Сергей/Pictures/neo.png", filename="neo.png")
+    my_file = discord.File("C:/Users/Сергей/Pictures/neo.png", filename="neo.png")
     embed = discord.Embed()
     embed.set_image(url="attachment://neo.png")
-    await ctx.send(file=my_file, embed=embed)"""
+    await ctx.send(file=my_file, embed=embed)
 
 
 """GAMES"""
