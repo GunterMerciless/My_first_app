@@ -3,6 +3,7 @@ import random
 import os
 from discord.ext import commands
 from discord.ext.commands import has_permissions, MissingPermissions
+from discord import Status
 # from discord.ext.commands import Bot
 
 token = os.environ.get('bot_token')
@@ -16,10 +17,19 @@ async def on_ready():
     print("With the iD: {0.user.id}".format(Bot))
 
 
+statuses = {
+    'online': 'теперь в сети',
+    'offline': 'вышел из сети'
+}
+
 @Bot.event
 async def on_member_update(before, after):
     channel = Bot.get_channel(595267827548553256)
-    await channel.send('{0} теперь {1}'.format(after.mention, after.status))
+    if before.desktop_status == after.desktop_status:
+        return
+    if (after.desktop_status == Status.online or after.desktop_status == Status.offline) and
+       (before.desktop_status != Status.idle and before.desktop_status != Status.dnd):
+        await channel.send('{0} {1}'.format(after.mention, statuses[after.desktop_status]))
 
 
 @Bot.event
