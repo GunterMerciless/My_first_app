@@ -3,7 +3,6 @@ import random
 import os
 from discord.ext import commands
 from discord.ext.commands import has_permissions, MissingPermissions
-from discord import Status
 # from discord.ext.commands import Bot
 
 token = os.environ.get('bot_token')
@@ -27,10 +26,10 @@ async def on_member_update(before, after):
     channel = Bot.get_channel(595267827548553256)
     if before.status == after.status:
         return
-    condition_after = (after.status == "online" or after.status == "offline")
-    condition_before = (before.status != "idle" and before.status != "dnd")
+    condition_after = (str(after.status) == "online" or str(after.status) == "offline")
+    condition_before = (str(before.status) != "idle" and str(before.status) != "dnd")
     if condition_after and condition_before:
-        await channel.send('{0} {1}'.format(after.mention, statuses[after.status]))
+        await channel.send('{0} {1}'.format(after.mention, statuses[str(after.status)]))
 
 
 @Bot.event
