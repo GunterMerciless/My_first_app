@@ -26,6 +26,8 @@ async def on_member_update(before, after):
     channel = Bot.get_channel(595267827548553256)
     if before.status == after.status:
         return
+    if before.is_on_mobile() or after.is_on_mobile():
+        return
     condition_after = (str(after.status) == "online" or str(after.status) == "offline")
     condition_before = (str(before.status) != "idle" and str(before.status) != "dnd")
     if condition_after and condition_before:
