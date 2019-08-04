@@ -25,7 +25,7 @@ statuses = {
 @Bot.event
 async def on_member_update(before, after):
     channel = Bot.get_channel(595267827548553256)
-    if before.desktop_status == after.desktop_status:
+    if before.status == after.status:
         return
     condition_after = (after.status == "online" or after.status == "offline")
     condition_before = (before.status != "idle" and before.status != "dnd")
