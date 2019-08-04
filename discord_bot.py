@@ -27,8 +27,9 @@ async def on_member_update(before, after):
     channel = Bot.get_channel(595267827548553256)
     if before.desktop_status == after.desktop_status:
         return
-    if (after.desktop_status == Status.online or after.desktop_status == Status.offline) and
-       (before.desktop_status != Status.idle and before.desktop_status != Status.dnd):
+    condition_after = (after.desktop_status == Status.online or after.desktop_status == Status.offline)
+    condition_before = (before.desktop_status != Status.idle and before.desktop_status != Status.dnd)
+    if condition_after and condition_before:
         await channel.send('{0} {1}'.format(after.mention, statuses[after.desktop_status]))
 
 
